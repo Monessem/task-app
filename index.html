@@ -670,25 +670,6 @@
         /* ==================== Content Area ==================== */
         .content { flex: 1; padding: var(--space-6); overflow-y: auto; }
         
-        /* Smooth page transitions */
-        .content {
-            animation: fadeIn 0.25s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .content.fade-out {
-            animation: fadeOut 0.15s ease-out;
-        }
-        
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
-        }
-        
         /* ==================== Dashboard ==================== */
         .dashboard-grid {
             display: grid;
@@ -1502,364 +1483,6 @@
         
         .note-card:hover .note-actions {
             opacity: 1;
-        }
-        
-        /* ==================== Folder Cards - Modern Design ==================== */
-        .folders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: var(--space-5);
-        }
-        
-        .folder-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(99, 102, 241, 0.12);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            min-height: 200px;
-        }
-        
-        .dark .folder-card {
-            background: rgba(30, 41, 59, 0.75);
-            border-color: rgba(99, 102, 241, 0.18);
-        }
-        
-        .folder-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.06) 0%, 
-                transparent 50%);
-            pointer-events: none;
-        }
-        
-        .folder-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 
-                0 20px 50px rgba(99, 102, 241, 0.2),
-                0 0 0 1px rgba(99, 102, 241, 0.25);
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-        
-        .folder-card:active {
-            transform: translateY(-3px) scale(1);
-        }
-        
-        .folder-header {
-            position: relative;
-            padding: var(--space-6);
-            display: flex;
-            align-items: center;
-            gap: var(--space-5);
-        }
-        
-        .folder-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 38px;
-            position: relative;
-            flex-shrink: 0;
-            box-shadow: 
-                0 8px 24px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(255, 255, 255, 0.25) inset;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .folder-card:hover .folder-icon-wrapper {
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 
-                0 12px 32px rgba(0, 0, 0, 0.18),
-                0 0 0 1px rgba(255, 255, 255, 0.35) inset;
-        }
-        
-        /* Glass reflection on icon */
-        .folder-icon-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 4px;
-            left: 12%;
-            width: 76%;
-            height: 35%;
-            background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.45) 0%, 
-                transparent 100%);
-            border-radius: 16px 16px 50% 50%;
-            pointer-events: none;
-        }
-        
-        .folder-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .folder-name {
-            font-size: var(--font-xl);
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--space-2);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .folder-meta {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            flex-wrap: wrap;
-        }
-        
-        .folder-count {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: var(--bg-subtle);
-            border-radius: var(--radius-full);
-            font-size: var(--font-sm);
-            color: var(--text-secondary);
-            font-weight: 700;
-            border: 1px solid var(--border-subtle);
-        }
-        
-        .folder-count.tasks {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.12));
-            border-color: rgba(99, 102, 241, 0.25);
-            color: var(--primary-600);
-        }
-        
-        .folder-count.notes {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(251, 191, 36, 0.12));
-            border-color: rgba(245, 158, 11, 0.25);
-            color: #b45309;
-        }
-        
-        .dark .folder-count.tasks {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
-            color: var(--primary-400);
-        }
-        
-        .dark .folder-count.notes {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(251, 191, 36, 0.25));
-            color: #fbbf24;
-        }
-        
-        .folder-body {
-            padding: 0 var(--space-6) var(--space-5);
-        }
-        
-        .folder-progress {
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-        }
-        
-        .folder-progress-bar {
-            flex: 1;
-            height: 8px;
-            background: var(--bg-muted);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-        }
-        
-        .folder-progress-fill {
-            height: 100%;
-            border-radius: var(--radius-full);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .folder-progress-text {
-            font-size: var(--font-sm);
-            color: var(--text-muted);
-            font-weight: 700;
-            min-width: 48px;
-            text-align: left;
-        }
-        
-        .folder-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: var(--space-2);
-            padding: var(--space-4) var(--space-5);
-            border-top: 1px solid var(--border-subtle);
-            background: rgba(0, 0, 0, 0.02);
-        }
-        
-        .dark .folder-footer {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        
-        .folder-action-btn {
-            width: 42px;
-            height: 42px;
-            border: none;
-            border-radius: var(--radius-md);
-            background: transparent;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all var(--transition-fast);
-        }
-        
-        .folder-action-btn:hover {
-            background: var(--bg-muted);
-            color: var(--text-primary);
-            transform: scale(1.1);
-        }
-        
-        .folder-action-btn.danger:hover {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-        
-        /* Folder Color Accent Line */
-        .folder-color-accent {
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            height: 4px;
-        }
-        
-        /* Empty Folders State */
-        .folders-empty {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-10);
-            text-align: center;
-        }
-        
-        .folders-empty-icon {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 56px;
-            margin-bottom: var(--space-5);
-            position: relative;
-            box-shadow: 
-                0 8px 32px rgba(99, 102, 241, 0.2),
-                0 0 0 1px rgba(99, 102, 241, 0.1) inset;
-        }
-        
-        .dark .folders-empty-icon {
-            background: linear-gradient(135deg, var(--primary-800), var(--primary-700));
-            box-shadow: 
-                0 8px 32px rgba(99, 102, 241, 0.3),
-                0 0 0 1px rgba(99, 102, 241, 0.2) inset;
-        }
-        
-        .folders-empty-icon::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 20%;
-            width: 60%;
-            height: 30%;
-            background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.3) 0%, 
-                transparent 100%);
-            border-radius: 50%;
-        }
-        
-        .folders-empty-title {
-            font-size: var(--font-xl);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--space-2);
-        }
-        
-        .folders-empty-desc {
-            font-size: var(--font-base);
-            color: var(--text-tertiary);
-            max-width: 300px;
-        }
-        
-        /* Folder Detail View */
-        .folder-detail-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-            margin-bottom: var(--space-6);
-            padding: var(--space-5);
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: var(--radius-xl);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        }
-        
-        .dark .folder-detail-header {
-            background: rgba(30, 41, 59, 0.7);
-            border-color: rgba(99, 102, 241, 0.15);
-        }
-        
-        .folder-detail-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 
-                0 4px 16px rgba(0, 0, 0, 0.1),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-        }
-        
-        .folder-detail-info {
-            flex: 1;
-        }
-        
-        .folder-detail-name {
-            font-size: var(--font-2xl);
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-        
-        .folder-detail-stats {
-            display: flex;
-            gap: var(--space-3);
-            margin-top: var(--space-2);
-        }
-        
-        .folder-section-title {
-            font-size: var(--font-lg);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--space-4);
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-        }
-        
-        .folder-section-title span {
-            font-size: 20px;
         }
         
         /* ==================== Modal - Glass ==================== */
@@ -3083,17 +2706,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--bg-surface);
+            background: var(--bg-glass-strong);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-default);
-            padding: 4px 0;
-            padding-bottom: max(4px, env(safe-area-inset-bottom));
+            padding: 6px 8px;
+            padding-bottom: max(6px, env(safe-area-inset-bottom));
             z-index: 200;
-            box-shadow: 0 -2px 20px rgba(0,0,0,0.08);
-        }
-        
-        .dark .bottom-nav {
-            background: var(--bg-surface);
-            border-top-color: var(--border-default);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
         }
         
         .bottom-nav-items {
@@ -3108,120 +2728,61 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 3px;
-            padding: 8px 4px;
-            border-radius: var(--radius-md);
+            gap: 2px;
+            padding: 8px 12px;
+            border-radius: var(--radius-lg);
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
             color: var(--text-muted);
-            min-width: 64px;
-            min-height: 52px;
+            min-width: 60px;
             position: relative;
-            -webkit-tap-highlight-color: transparent;
         }
         
         .bottom-nav-item:active {
-            transform: scale(0.92);
-            background: var(--bg-subtle);
+            transform: scale(0.95);
         }
         
         .bottom-nav-item.active {
             color: var(--primary-500);
         }
         
-        .bottom-nav-item.active .bottom-nav-icon {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-            border-radius: 12px;
-            padding: 6px 12px;
-        }
-        
-        .bottom-nav-item.active .bottom-nav-label {
-            font-weight: 700;
+        .bottom-nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-500), var(--accent-violet));
+            border-radius: 0 0 3px 3px;
         }
         
         .bottom-nav-icon {
             font-size: 22px;
             line-height: 1;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: all 0.15s ease;
         }
         
         .bottom-nav-label {
             font-size: 10px;
             font-weight: 600;
-            line-height: 1;
         }
         
         .bottom-nav-count {
             position: absolute;
-            top: 4px;
-            right: 12px;
-            background: linear-gradient(135deg, var(--danger), #f43f5e);
+            top: 2px;
+            right: 8px;
+            background: var(--danger);
             color: white;
             font-size: 9px;
             font-weight: 700;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 5px;
-            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
-        }
-        
-        /* Bottom nav extra items (More menu) */
-        .bottom-nav-more {
-            position: relative;
-        }
-        
-        .bottom-nav-more-menu {
-            position: absolute;
-            bottom: 100%;
-            right: 0;
-            margin-bottom: 8px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-default);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
-            padding: var(--space-2);
-            min-width: 160px;
-            display: none;
-            z-index: 250;
-        }
-        
-        .bottom-nav-more-menu.show {
-            display: block;
-            animation: slideUp 0.2s ease;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .bottom-nav-more-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            padding: var(--space-3);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            color: var(--text-primary);
-            font-size: var(--font-sm);
-            font-weight: 500;
-            transition: background 0.15s ease;
-        }
-        
-        .bottom-nav-more-item:active {
-            background: var(--bg-subtle);
-        }
-        
-        .bottom-nav-more-item.active {
-            color: var(--primary-500);
-            background: rgba(99, 102, 241, 0.08);
+            padding: 0 4px;
         }
         
         /* Show bottom nav on mobile */
@@ -3463,924 +3024,6 @@
                 margin-bottom: var(--space-4);
             }
         }
-        
-        /* ==================== Enhanced Mobile Experience ==================== */
-        @media (max-width: 768px) {
-            /* Root mobile optimizations */
-            * {
-                -webkit-tap-highlight-color: transparent;
-            }
-            
-            html {
-                font-size: 15px;
-            }
-            
-            body {
-                overflow-x: hidden;
-                touch-action: pan-y;
-                -webkit-font-smoothing: antialiased;
-            }
-            
-            /* Hide sidebar completely on mobile */
-            .sidebar {
-                display: none !important;
-            }
-            
-            /* Main content full width */
-            .app-container {
-                display: block;
-            }
-            
-            .main-content {
-                width: 100%;
-                padding-bottom: 0;
-            }
-            
-            /* Improved header */
-            .header {
-                position: sticky;
-                top: 0;
-                z-index: 100;
-                background: var(--bg-glass-strong);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                padding: var(--space-3) var(--space-4);
-                min-height: 56px;
-                border-bottom: 1px solid var(--border-subtle);
-            }
-            
-            .header-title {
-                font-size: var(--font-lg);
-                gap: var(--space-2);
-            }
-            
-            .header-title-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 18px;
-                border-radius: var(--radius-md);
-            }
-            
-            .header-actions {
-                gap: var(--space-2);
-            }
-            
-            /* Hide search on mobile */
-            .search-box {
-                display: none;
-            }
-            
-            /* Content area */
-            .content {
-                padding: var(--space-4);
-                padding-bottom: calc(90px + env(safe-area-inset-bottom));
-                min-height: calc(100vh - 56px);
-            }
-            
-            /* ==================== Dashboard Mobile ==================== */
-            .dashboard-grid {
-                display: block;
-                gap: 0;
-            }
-            
-            .stats-row {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-3);
-                margin-bottom: var(--space-4);
-                grid-column: auto;
-            }
-            
-            .stat-card {
-                padding: var(--space-4);
-                border-radius: 16px;
-            }
-            
-            .stat-icon {
-                width: 42px;
-                height: 42px;
-                font-size: 22px;
-                margin-bottom: var(--space-2);
-            }
-            
-            .stat-number {
-                font-size: var(--font-2xl);
-            }
-            
-            .stat-label {
-                font-size: var(--font-xs);
-            }
-            
-            .progress-bar {
-                height: 6px;
-            }
-            
-            /* Dashboard cards */
-            .dashboard-card {
-                border-radius: 18px;
-                padding: var(--space-4);
-                margin-bottom: var(--space-4);
-            }
-            
-            .card-header {
-                margin-bottom: var(--space-3);
-            }
-            
-            .card-title {
-                font-size: var(--font-base);
-                gap: var(--space-2);
-            }
-            
-            .card-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            
-            /* Pomodoro card */
-            .pomodoro-card {
-                grid-column: auto;
-            }
-            
-            .pomodoro-timer {
-                padding: var(--space-3);
-            }
-            
-            .timer-display {
-                width: 130px;
-                height: 130px;
-                margin-bottom: var(--space-3);
-            }
-            
-            .timer-time {
-                font-size: 28px;
-            }
-            
-            .timer-label {
-                font-size: var(--font-xs);
-            }
-            
-            .timer-controls {
-                gap: var(--space-3);
-            }
-            
-            .timer-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 18px;
-            }
-            
-            .timer-modes {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: var(--space-2);
-            }
-            
-            .timer-mode-btn {
-                padding: var(--space-2) var(--space-3);
-                font-size: var(--font-xs);
-            }
-            
-            .pomodoro-stats {
-                gap: var(--space-2);
-            }
-            
-            .pomo-stat-value {
-                font-size: var(--font-lg);
-            }
-            
-            /* Habits card */
-            .habits-card {
-                grid-column: auto;
-            }
-            
-            .habits-grid {
-                gap: var(--space-3);
-            }
-            
-            .habit-item {
-                padding: var(--space-3);
-                border-radius: 14px;
-                gap: var(--space-3);
-            }
-            
-            .habit-icon {
-                width: 42px;
-                height: 42px;
-                font-size: 20px;
-            }
-            
-            .habit-name {
-                font-size: var(--font-sm);
-            }
-            
-            .habit-streak {
-                font-size: var(--font-xs);
-            }
-            
-            .habit-week {
-                gap: 3px;
-            }
-            
-            .habit-day {
-                width: 30px;
-                height: 30px;
-                font-size: 10px;
-            }
-            
-            .streak-badge {
-                padding: 2px 8px;
-                font-size: var(--font-xs);
-            }
-            
-            /* ==================== Tasks Mobile ==================== */
-            .todo-list {
-                gap: var(--space-3);
-            }
-            
-            .todo-item {
-                padding: var(--space-4);
-                border-radius: 14px;
-                gap: var(--space-3);
-                min-height: auto;
-            }
-            
-            .todo-checkbox {
-                width: 26px;
-                height: 26px;
-                flex-shrink: 0;
-            }
-            
-            .todo-item-content {
-                flex: 1;
-                min-width: 0;
-            }
-            
-            .todo-title {
-                font-size: var(--font-base);
-                line-height: 1.5;
-                word-break: break-word;
-            }
-            
-            .todo-meta {
-                font-size: var(--font-xs);
-                margin-top: var(--space-1);
-            }
-            
-            .todo-actions {
-                opacity: 1;
-                gap: var(--space-1);
-            }
-            
-            .todo-action-btn {
-                width: 36px;
-                height: 36px;
-            }
-            
-            .todo-progress {
-                margin-top: var(--space-2);
-            }
-            
-            .progress-steps-bar {
-                height: 5px;
-            }
-            
-            .progress-steps-text {
-                font-size: var(--font-xs);
-            }
-            
-            /* ==================== Notes Mobile ==================== */
-            .notes-grid {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-3);
-            }
-            
-            .note-card {
-                border-radius: 16px;
-                min-height: auto;
-            }
-            
-            .note-color-bar {
-                height: 4px;
-            }
-            
-            .note-card-body {
-                padding: var(--space-4);
-            }
-            
-            .note-title {
-                font-size: var(--font-base);
-                margin-bottom: var(--space-2);
-            }
-            
-            .note-content {
-                font-size: var(--font-sm);
-                line-height: 1.6;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-            
-            .note-footer {
-                padding-top: var(--space-3);
-                margin-top: var(--space-3);
-            }
-            
-            .note-date {
-                font-size: var(--font-xs);
-            }
-            
-            .note-actions {
-                opacity: 1;
-                gap: var(--space-1);
-            }
-            
-            /* ==================== Folders Mobile ==================== */
-            .folders-grid {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-4);
-            }
-            
-            .folder-card {
-                border-radius: 20px;
-                min-height: auto;
-            }
-            
-            .folder-color-accent {
-                height: 4px;
-            }
-            
-            .folder-header {
-                padding: var(--space-4);
-                gap: var(--space-3);
-                align-items: center;
-            }
-            
-            .folder-icon-wrapper {
-                width: 60px;
-                height: 60px;
-                border-radius: 16px;
-                font-size: 28px;
-            }
-            
-            .folder-name {
-                font-size: var(--font-lg);
-                margin-bottom: var(--space-1);
-            }
-            
-            .folder-meta {
-                gap: var(--space-2);
-                flex-wrap: wrap;
-            }
-            
-            .folder-count {
-                padding: 4px 10px;
-                font-size: var(--font-xs);
-            }
-            
-            .folder-body {
-                padding: 0 var(--space-4) var(--space-3);
-            }
-            
-            .folder-progress {
-                gap: var(--space-2);
-            }
-            
-            .folder-progress-bar {
-                height: 6px;
-            }
-            
-            .folder-progress-text {
-                font-size: var(--font-xs);
-                min-width: 40px;
-            }
-            
-            .folder-footer {
-                padding: var(--space-3);
-                gap: var(--space-1);
-            }
-            
-            .folder-action-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-            
-            /* Folder detail */
-            .folder-detail-header {
-                padding: var(--space-4);
-                border-radius: 16px;
-                gap: var(--space-3);
-            }
-            
-            .folder-detail-icon {
-                width: 54px;
-                height: 54px;
-                font-size: 26px;
-            }
-            
-            .folder-detail-name {
-                font-size: var(--font-xl);
-            }
-            
-            .folder-detail-stats {
-                flex-wrap: wrap;
-                gap: var(--space-2);
-            }
-            
-            .folder-section-title {
-                font-size: var(--font-base);
-                margin-bottom: var(--space-3);
-            }
-            
-            /* ==================== Settings Mobile ==================== */
-            .settings-section {
-                padding: var(--space-4);
-                border-radius: 16px;
-                margin-bottom: var(--space-3);
-            }
-            
-            .settings-title {
-                font-size: var(--font-base);
-                margin-bottom: var(--space-3);
-            }
-            
-            .settings-row {
-                padding: var(--space-3);
-                border-radius: var(--radius-md);
-                gap: var(--space-3);
-            }
-            
-            .settings-row > div:first-child {
-                flex: 1;
-            }
-            
-            .settings-label {
-                font-size: var(--font-sm);
-            }
-            
-            .settings-desc {
-                font-size: var(--font-xs);
-            }
-            
-            /* ==================== Modals Mobile ==================== */
-            .modal-overlay {
-                padding: 0;
-                align-items: flex-end;
-            }
-            
-            .modal {
-                width: 100%;
-                max-height: 90vh;
-                border-radius: 20px 20px 0 0;
-                margin: 0;
-            }
-            
-            .modal-header {
-                padding: var(--space-4);
-                border-radius: 20px 20px 0 0;
-            }
-            
-            .modal-title {
-                font-size: var(--font-lg);
-            }
-            
-            .modal-close {
-                width: 36px;
-                height: 36px;
-            }
-            
-            .modal-body {
-                padding: var(--space-4);
-                max-height: calc(90vh - 130px);
-            }
-            
-            .modal-footer {
-                padding: var(--space-3) var(--space-4);
-                gap: var(--space-2);
-                flex-wrap: wrap;
-            }
-            
-            .modal-footer .btn {
-                flex: 1;
-                min-width: 100px;
-            }
-            
-            /* ==================== Forms Mobile ==================== */
-            .form-group {
-                margin-bottom: var(--space-4);
-            }
-            
-            .form-label {
-                font-size: var(--font-sm);
-                margin-bottom: var(--space-2);
-            }
-            
-            .form-input, .form-select, .form-textarea {
-                font-size: 16px;
-                padding: var(--space-3) var(--space-4);
-                border-radius: var(--radius-md);
-            }
-            
-            .form-textarea {
-                min-height: 100px;
-            }
-            
-            .color-picker {
-                gap: var(--space-2);
-            }
-            
-            .color-option {
-                width: 38px;
-                height: 38px;
-                border-radius: var(--radius-md);
-            }
-            
-            .tags-input-container {
-                padding: var(--space-2);
-            }
-            
-            .tag-item {
-                padding: 4px 10px;
-                font-size: var(--font-xs);
-            }
-            
-            .checkbox-container {
-                padding: var(--space-2);
-            }
-            
-            .checkbox-custom {
-                width: 22px;
-                height: 22px;
-            }
-            
-            /* ==================== Buttons Mobile ==================== */
-            .btn {
-                padding: var(--space-3) var(--space-4);
-                font-size: var(--font-sm);
-                border-radius: var(--radius-md);
-                min-height: 44px;
-            }
-            
-            .btn-sm {
-                padding: var(--space-2) var(--space-3);
-                font-size: var(--font-xs);
-                min-height: 36px;
-            }
-            
-            .btn-icon {
-                width: 44px;
-                height: 44px;
-                padding: 0;
-            }
-            
-            /* ==================== Bottom Navigation ==================== */
-            .bottom-nav {
-                display: block;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: var(--bg-glass-strong);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border-top: 1px solid rgba(99, 102, 241, 0.1);
-                padding: 4px 0;
-                padding-bottom: max(4px, env(safe-area-inset-bottom));
-                z-index: 200;
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-            }
-            
-            .dark .bottom-nav {
-                background: rgba(30, 41, 59, 0.95);
-                border-top-color: rgba(99, 102, 241, 0.15);
-            }
-            
-            .bottom-nav-items {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 0 4px;
-            }
-            
-            .bottom-nav-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2px;
-                padding: 6px 8px;
-                border-radius: var(--radius-md);
-                cursor: pointer;
-                color: var(--text-muted);
-                min-width: 48px;
-                flex: 1;
-                max-width: 72px;
-                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-                position: relative;
-                -webkit-tap-highlight-color: transparent;
-            }
-            
-            .bottom-nav-item:active {
-                transform: scale(0.92);
-            }
-            
-            .bottom-nav-item.active {
-                color: var(--primary-500);
-            }
-            
-            .bottom-nav-item.active .bottom-nav-icon {
-                background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
-                border-radius: 10px;
-                padding: 4px 8px;
-                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
-            }
-            
-            .bottom-nav-icon {
-                font-size: 20px;
-                line-height: 1;
-                padding: 3px 5px;
-                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            
-            .bottom-nav-label {
-                font-size: 9px;
-                font-weight: 600;
-                transition: all 0.2s ease;
-            }
-            
-            .bottom-nav-item.active .bottom-nav-label {
-                color: var(--primary-500);
-            }
-            
-            .bottom-nav-count {
-                position: absolute;
-                top: 2px;
-                right: 8px;
-                min-width: 16px;
-                height: 16px;
-                font-size: 9px;
-                border-radius: 8px;
-                background: var(--accent-rose);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-            }
-            
-            /* ==================== Floating Button ==================== */
-            .floating-add-btn {
-                display: flex !important;
-                position: fixed;
-                bottom: calc(80px + var(--space-3));
-                left: var(--space-3);
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, var(--primary-500), var(--accent-violet), var(--accent-pink));
-                color: white;
-                font-size: 24px;
-                border: none;
-                cursor: pointer;
-                align-items: center;
-                justify-content: center;
-                z-index: 150;
-                box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-            }
-            
-            .floating-add-btn:active {
-                transform: scale(0.95);
-            }
-            
-            /* Hide header primary button on mobile */
-            .header .btn-primary {
-                display: none;
-            }
-            
-            /* ==================== Empty States ==================== */
-            .empty-state {
-                padding: var(--space-8) var(--space-4);
-            }
-            
-            .empty-state-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 40px;
-                margin-bottom: var(--space-4);
-            }
-            
-            .empty-state-title {
-                font-size: var(--font-lg);
-                margin-bottom: var(--space-2);
-            }
-            
-            .empty-state-desc {
-                font-size: var(--font-sm);
-            }
-            
-            .folders-empty {
-                padding: var(--space-8) var(--space-4);
-            }
-            
-            .folders-empty-icon {
-                width: 90px;
-                height: 90px;
-                font-size: 44px;
-                margin-bottom: var(--space-4);
-            }
-            
-            .folders-empty-title {
-                font-size: var(--font-lg);
-            }
-            
-            .folders-empty-desc {
-                font-size: var(--font-sm);
-            }
-            
-            /* ==================== Toast ==================== */
-            .toast-container {
-                left: var(--space-3);
-                right: var(--space-3);
-                bottom: 90px;
-            }
-            
-            .toast {
-                padding: var(--space-3) var(--space-4);
-                border-radius: var(--radius-md);
-                font-size: var(--font-sm);
-            }
-            
-            /* ==================== Dropdowns ==================== */
-            .global-dropdown .dropdown-menu {
-                border-radius: 14px;
-                min-width: 160px;
-            }
-            
-            .dropdown-item {
-                padding: var(--space-3);
-                font-size: var(--font-sm);
-            }
-            
-            /* ==================== Achievements ==================== */
-            .achievements-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: var(--space-2);
-            }
-            
-            .achievement-card {
-                padding: var(--space-3);
-                border-radius: 12px;
-            }
-            
-            .achievement-icon {
-                font-size: 28px;
-                margin-bottom: var(--space-1);
-            }
-            
-            .achievement-name {
-                font-size: var(--font-xs);
-            }
-            
-            /* ==================== Misc Mobile ==================== */
-            /* Disable text selection on interactive elements */
-            .nav-item, .bottom-nav-item, .todo-item, .note-card, .folder-card, .habit-item, .btn {
-                -webkit-user-select: none;
-                user-select: none;
-            }
-            
-            /* Better scrolling */
-            .content, .modal-body {
-                -webkit-overflow-scrolling: touch;
-                overscroll-behavior: contain;
-            }
-            
-            /* Weather widget */
-            .weather-widget {
-                display: none;
-            }
-            
-            /* Pull indicator */
-            .pull-indicator {
-                height: 50px;
-                transform: translateY(-50px);
-            }
-            
-            /* Swipe delete */
-            .swipe-delete-bg {
-                padding: 0 var(--space-4);
-            }
-            
-            .swipe-delete-bg span {
-                font-size: var(--font-xs);
-            }
-            
-            /* Subtasks */
-            .subtasks-container {
-                padding: var(--space-3);
-            }
-            
-            .subtask-item {
-                padding: var(--space-2) 0;
-            }
-            
-            .subtask-checkbox {
-                width: 20px;
-                height: 20px;
-            }
-            
-            /* Recycle bin */
-            .recycle-item {
-                padding: var(--space-3);
-                border-radius: var(--radius-md);
-                margin-bottom: var(--space-2);
-            }
-            
-            .recycle-title {
-                font-size: var(--font-sm);
-            }
-            
-            .recycle-type {
-                font-size: var(--font-xs);
-            }
-        }
-        
-        /* Extra small screens */
-        @media (max-width: 380px) {
-            html {
-                font-size: 14px;
-            }
-            
-            .stats-row {
-                gap: var(--space-2);
-            }
-            
-            .stat-card {
-                padding: var(--space-3);
-            }
-            
-            .stat-number {
-                font-size: var(--font-xl);
-            }
-            
-            .folder-icon-wrapper {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-            }
-            
-            .timer-display {
-                width: 110px;
-                height: 110px;
-            }
-            
-            .timer-time {
-                font-size: 26px;
-            }
-            
-            .floating-add-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 22px;
-            }
-        }
-        
-        /* Landscape mobile */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .modal {
-                max-height: 95vh;
-                border-radius: 16px;
-                margin: auto;
-            }
-            
-            .modal-header {
-                border-radius: 16px 16px 0 0;
-            }
-            
-            .modal-body {
-                max-height: calc(95vh - 100px);
-            }
-            
-            .timer-display {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .timer-time {
-                font-size: 24px;
-            }
-            
-            .pomodoro-timer {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
     </style>
 </head>
 <body>
@@ -4547,10 +3190,6 @@
             <div class="bottom-nav-item" data-view="habits" onclick="switchView('habits')">
                 <span class="bottom-nav-icon">🎯</span>
                 <span class="bottom-nav-label">العادات</span>
-            </div>
-            <div class="bottom-nav-item" data-view="folders" onclick="switchView('folders')">
-                <span class="bottom-nav-icon">📁</span>
-                <span class="bottom-nav-label">المجلدات</span>
             </div>
             <div class="bottom-nav-item" data-view="settings" onclick="switchView('settings')">
                 <span class="bottom-nav-icon">⚙️</span>
@@ -6973,35 +5612,17 @@
 
         // ==================== View Management ====================
         function switchView(view) {
-            // Update state
             state.currentView = view;
             
-            // Add fade-out animation to content
-            const contentArea = document.getElementById('content-area');
-            if (contentArea) {
-                contentArea.classList.add('fade-out');
-            }
-            
-            // Update all navigation elements with smooth transition
-            requestAnimationFrame(() => {
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    if (item.dataset.view === view) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-                
-                document.querySelectorAll('.bottom-nav-item').forEach(item => {
-                    if (item.dataset.view === view) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.view === view);
             });
             
-            // Update header
+            // Update bottom nav
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.view === view);
+            });
+            
             const titles = {
                 dashboard: { title: i18n.t('dashboard'), icon: '🏠' },
                 todos: { title: i18n.t('todos'), icon: '✅' },
@@ -7017,38 +5638,22 @@
             };
             
             const config = titles[view] || titles.dashboard;
-            const viewTitle = document.getElementById('view-title');
-            const headerIcon = document.getElementById('header-icon');
-            if (viewTitle) viewTitle.textContent = config.title;
-            if (headerIcon) headerIcon.textContent = config.icon;
+            document.getElementById('view-title').textContent = config.title;
+            document.getElementById('header-icon').textContent = config.icon;
             
-            // Close sidebar
-            closeSidebar();
-            
-            // Render the view after a short delay for smooth animation
-            setTimeout(() => {
-                renderView();
-                // Remove fade-out class
-                if (contentArea) {
-                    contentArea.classList.remove('fade-out');
-                }
-            }, 50);
+            renderView();
+            if (window.innerWidth <= 768) closeSidebar();
+            updateCounts();
         }
 
         function renderView() {
-            const contentArea = document.getElementById('content-area');
-            if (!contentArea) {
-                console.error('content-area not found');
-                return;
-            }
-            
-            const viewRenderers = {
+            const views = {
                 dashboard: renderDashboard,
                 todos: renderTodos,
                 notes: renderNotes,
                 habits: renderHabitsPage,
-                important: function() { renderFilteredTodos('important'); },
-                today: function() { renderFilteredTodos('today'); },
+                important: () => renderFilteredTodos('important'),
+                today: () => renderFilteredTodos('today'),
                 flagged: renderFlagged,
                 history: renderHistory,
                 folders: renderFolders,
@@ -7056,31 +5661,24 @@
                 settings: renderSettings
             };
             
-            const renderer = viewRenderers[state.currentView];
-            
-            if (renderer) {
-                try {
+            try {
+                const renderer = views[state.currentView];
+                if (renderer) {
                     renderer();
-                } catch (e) {
-                    console.error('Error rendering view:', state.currentView, e);
+                } else {
+                    console.warn('Unknown view:', state.currentView);
                     renderDashboard();
                 }
-            } else {
-                console.warn('Unknown view:', state.currentView);
+            } catch (e) {
+                console.error('Error rendering view:', state.currentView, e);
                 renderDashboard();
             }
             
-            // Update add button visibility
             const showAdd = ['todos', 'notes', 'habits', 'folders'].includes(state.currentView);
             const addBtn = document.getElementById('add-btn');
-            if (addBtn) {
-                addBtn.style.display = showAdd ? 'flex' : 'none';
-            }
-            
             const floatingBtn = document.querySelector('.floating-add-btn');
-            if (floatingBtn) {
-                floatingBtn.style.display = window.innerWidth <= 768 && showAdd ? 'flex' : 'none';
-            }
+            if (addBtn) addBtn.style.display = showAdd ? 'flex' : 'none';
+            if (floatingBtn) floatingBtn.style.display = window.innerWidth <= 768 && showAdd ? 'flex' : 'none';
         }
 
         // ==================== Dashboard ====================
@@ -7899,55 +6497,27 @@
         function renderFolders() {
             if (state.folders.length === 0) {
                 document.getElementById('content-area').innerHTML = `
-                    <div class="folders-empty">
-                        <div class="folders-empty-icon">📁</div>
-                        <div class="folders-empty-title">لا توجد مجلدات</div>
-                        <p class="folders-empty-desc">اضغط على زر "إضافة" لإنشاء مجلد جديد وتنظيم مهامك وملاحظاتك</p>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📁</div>
+                        <div class="empty-state-title">لا توجد مجلدات</div>
+                        <p class="empty-state-desc">اضغط "إضافة" لإنشاء مجلد</p>
                     </div>
                 `;
                 return;
             }
             
             document.getElementById('content-area').innerHTML = `
-                <div class="folders-grid">${state.folders.map(f => {
+                <div class="notes-grid">${state.folders.map(f => {
                     const todosCount = state.todos.filter(t => t.folderId === f.id && !t.deletedAt).length;
                     const notesCount = state.notes.filter(n => n.folderId === f.id && !n.deletedAt).length;
-                    const completedTodos = state.todos.filter(t => t.folderId === f.id && !t.deletedAt && t.completed).length;
-                    const progress = todosCount > 0 ? Math.round((completedTodos / todosCount) * 100) : 0;
                     const color = Security.isValidColor(f.color) ? f.color : '#6366f1';
-                    const icon = f.icon || '📁';
-                    
-                    // Create gradient background for icon
-                    const iconBg = `linear-gradient(135deg, ${color}22, ${color}44)`;
-                    
                     return `
-                        <div class="folder-card" onclick="showFolder('${f.id}')">
-                            <div class="folder-color-accent" style="background:${color}"></div>
-                            <div class="folder-header">
-                                <div class="folder-icon-wrapper" style="background:${iconBg}">
-                                    ${icon}
-                                </div>
-                                <div class="folder-info">
-                                    <div class="folder-name">${Security.sanitize(f.name)}</div>
-                                    <div class="folder-meta">
-                                        <span class="folder-count tasks">📋 ${todosCount} مهام</span>
-                                        <span class="folder-count notes">📝 ${notesCount} ملاحظات</span>
-                                    </div>
-                                </div>
-                            </div>
-                            ${todosCount > 0 ? `
-                            <div class="folder-body">
-                                <div class="folder-progress">
-                                    <div class="folder-progress-bar">
-                                        <div class="folder-progress-fill" style="width:${progress}%;background:${color}"></div>
-                                    </div>
-                                    <span class="folder-progress-text">${progress}%</span>
-                                </div>
-                            </div>
-                            ` : ''}
-                            <div class="folder-footer">
-                                <button class="folder-action-btn" onclick="event.stopPropagation();editFolder('${f.id}')" title="تعديل">✏️</button>
-                                <button class="folder-action-btn danger" onclick="event.stopPropagation();deleteFolder('${f.id}')" title="حذف">🗑️</button>
+                        <div class="note-card" style="--note-color:${color}" onclick="showFolder('${f.id}')">
+                            <div class="note-title">${f.icon || '📁'} ${Security.sanitize(f.name)}</div>
+                            <div class="note-content">${todosCount} مهام • ${notesCount} ملاحظات</div>
+                            <div class="note-footer">
+                                <button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();editFolder('${f.id}')">✏️</button>
+                                <button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();deleteFolder('${f.id}')">🗑️</button>
                             </div>
                         </div>
                     `;
@@ -7959,48 +6529,15 @@
             const folder = state.folders.find(f => f.id === id);
             const folderTodos = state.todos.filter(t => t.folderId === id && !t.deletedAt);
             const folderNotes = state.notes.filter(n => n.folderId === id && !n.deletedAt);
-            const completedTodos = folderTodos.filter(t => t.completed).length;
-            const progress = folderTodos.length > 0 ? Math.round((completedTodos / folderTodos.length) * 100) : 0;
-            const color = Security.isValidColor(folder.color) ? folder.color : '#6366f1';
-            const icon = folder.icon || '📁';
-            const iconBg = `linear-gradient(135deg, ${color}22, ${color}44)`;
             
             document.getElementById('content-area').innerHTML = `
-                <div style="margin-bottom:var(--space-4)">
-                    <button class="btn btn-secondary" onclick="switchView('folders')">→ رجوع للمجلدات</button>
+                <div style="margin-bottom:var(--space-6)">
+                    <button class="btn btn-secondary" onclick="switchView('folders')">→ رجوع</button>
                 </div>
-                
-                <div class="folder-detail-header">
-                    <div class="folder-detail-icon" style="background:${iconBg}">
-                        ${icon}
-                    </div>
-                    <div class="folder-detail-info">
-                        <div class="folder-detail-name">${Security.sanitize(folder.name)}</div>
-                        <div class="folder-detail-stats">
-                            <span class="folder-count tasks">📋 ${folderTodos.length} مهام</span>
-                            <span class="folder-count notes">📝 ${folderNotes.length} ملاحظات</span>
-                            ${folderTodos.length > 0 ? `<span class="folder-count" style="background:${color}22;color:${color};border-color:${color}44">✅ ${progress}% مكتمل</span>` : ''}
-                        </div>
-                    </div>
-                </div>
-                
-                ${folderTodos.length > 0 ? `
-                    <div class="folder-section-title"><span>📋</span> المهام</div>
-                    <div class="todo-list" style="margin-bottom:var(--space-6)">${folderTodos.map(t => renderTodoItem(t)).join('')}</div>
-                ` : ''}
-                
-                ${folderNotes.length > 0 ? `
-                    <div class="folder-section-title"><span>📝</span> الملاحظات</div>
-                    <div class="notes-grid">${folderNotes.map(n => renderNoteCard(n)).join('')}</div>
-                ` : ''}
-                
-                ${folderTodos.length === 0 && folderNotes.length === 0 ? `
-                    <div class="folders-empty">
-                        <div class="folders-empty-icon">📭</div>
-                        <div class="folders-empty-title">المجلد فارغ</div>
-                        <p class="folders-empty-desc">أضف مهام أو ملاحظات لهذا المجلد من خلال إنشاء جديد وتحديد هذا المجلد</p>
-                    </div>
-                ` : ''}
+                <h2 style="margin-bottom:var(--space-4)">${folder.icon || '📁'} ${Security.sanitize(folder.name)}</h2>
+                ${folderTodos.length > 0 ? `<h3 style="margin-bottom:var(--space-3)">المهام</h3><div class="todo-list" style="margin-bottom:var(--space-6)">${folderTodos.map(t => renderTodoItem(t)).join('')}</div>` : ''}
+                ${folderNotes.length > 0 ? `<h3 style="margin-bottom:var(--space-3)">الملاحظات</h3><div class="notes-grid">${folderNotes.map(n => renderNoteCard(n)).join('')}</div>` : ''}
+                ${folderTodos.length === 0 && folderNotes.length === 0 ? '<div class="empty-state"><div class="empty-state-icon">📭</div><div class="empty-state-title">المجلد فارغ</div></div>' : ''}
             `;
         }
 
@@ -8201,7 +6738,7 @@
                 <div class="settings-section">
                     <h3 class="settings-title">ℹ️ ${i18n.t('about')}</h3>
                     <div style="color:var(--text-secondary);font-size:var(--font-sm)">
-                        <p><strong>TaskNotes Ultimate</strong> - v8.2.2</p>
+                        <p><strong>TaskNotes Ultimate</strong> - v8.2.3</p>
                         <p>✅ ${i18n.t('todos')} | 📝 ${i18n.t('notes')} | 🎯 ${i18n.t('habits')} | 🍅 ${i18n.t('pomodoroTimer')} | ☁️ مزامنة</p>
                     </div>
                 </div>
@@ -9309,17 +7846,6 @@
             document.getElementById('sidebar-overlay').classList.remove('active');
         }
 
-        // Bottom Navigation Functions
-        function toggleBottomNavMore() {
-            const menu = document.getElementById('bottom-nav-more-menu');
-            if (menu) menu.classList.toggle('show');
-        }
-
-        function closeBottomNavMore() {
-            const menu = document.getElementById('bottom-nav-more-menu');
-            if (menu) menu.classList.remove('show');
-        }
-
         // Debounce للبحث - تحسين الأداء
         let searchTimeout;
         function handleSearch(q) {
@@ -9352,16 +7878,6 @@
             document.getElementById('todos-count').textContent = activeTodos.length;
             document.getElementById('notes-count').textContent = activeNotes.length;
             document.getElementById('habits-count').textContent = activeHabits.length;
-            
-            // Bottom nav todos count
-            const bottomTodosCount = document.getElementById('bottom-todos-count');
-            const pendingTodos = activeTodos.filter(t => !t.completed).length;
-            if (pendingTodos > 0) {
-                bottomTodosCount.textContent = pendingTodos;
-                bottomTodosCount.style.display = 'flex';
-            } else {
-                bottomTodosCount.style.display = 'none';
-            }
             
             // الفلاتر
             const today = new Date().toISOString().split('T')[0];

@@ -3447,10 +3447,34 @@
         
         /* ==================== Enhanced Mobile Experience ==================== */
         @media (max-width: 768px) {
-            /* Better body scrolling */
+            /* Root mobile optimizations */
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            html {
+                font-size: 15px;
+            }
+            
             body {
                 overflow-x: hidden;
-                -webkit-tap-highlight-color: transparent;
+                touch-action: pan-y;
+                -webkit-font-smoothing: antialiased;
+            }
+            
+            /* Hide sidebar completely on mobile */
+            .sidebar {
+                display: none !important;
+            }
+            
+            /* Main content full width */
+            .app-container {
+                display: block;
+            }
+            
+            .main-content {
+                width: 100%;
+                padding-bottom: 0;
             }
             
             /* Improved header */
@@ -3463,6 +3487,7 @@
                 -webkit-backdrop-filter: blur(12px);
                 padding: var(--space-3) var(--space-4);
                 min-height: 56px;
+                border-bottom: 1px solid var(--border-subtle);
             }
             
             .header-title {
@@ -3471,128 +3496,71 @@
             }
             
             .header-title-icon {
-                width: 36px;
-                height: 36px;
+                width: 38px;
+                height: 38px;
                 font-size: 18px;
+                border-radius: var(--radius-md);
             }
             
-            /* Improved content area */
+            .header-actions {
+                gap: var(--space-2);
+            }
+            
+            /* Hide search on mobile */
+            .search-box {
+                display: none;
+            }
+            
+            /* Content area */
             .content {
                 padding: var(--space-4);
-                padding-bottom: 120px;
+                padding-bottom: calc(90px + env(safe-area-inset-bottom));
                 min-height: calc(100vh - 56px);
             }
             
-            /* Better folder cards on mobile */
-            .folders-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-4);
+            /* ==================== Dashboard Mobile ==================== */
+            .dashboard-grid {
+                display: block;
+                gap: 0;
             }
             
-            .folder-card {
-                min-height: auto;
-                border-radius: 20px;
-            }
-            
-            .folder-header {
-                padding: var(--space-5);
-                gap: var(--space-4);
-            }
-            
-            .folder-icon-wrapper {
-                width: 70px;
-                height: 70px;
-                border-radius: 18px;
-                font-size: 32px;
-            }
-            
-            .folder-name {
-                font-size: var(--font-lg);
-            }
-            
-            .folder-meta {
-                gap: var(--space-2);
-            }
-            
-            .folder-count {
-                padding: 5px 12px;
-                font-size: var(--font-xs);
-            }
-            
-            .folder-body {
-                padding: 0 var(--space-5) var(--space-4);
-            }
-            
-            .folder-footer {
-                padding: var(--space-3) var(--space-4);
-            }
-            
-            .folder-action-btn {
-                width: 38px;
-                height: 38px;
-            }
-            
-            /* Better notes grid */
-            .notes-grid {
-                grid-template-columns: 1fr;
+            .stats-row {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
                 gap: var(--space-3);
+                margin-bottom: var(--space-4);
+                grid-column: auto;
             }
             
-            .note-card {
+            .stat-card {
+                padding: var(--space-4);
                 border-radius: 16px;
             }
             
-            .note-card-body {
-                padding: var(--space-4);
+            .stat-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 22px;
+                margin-bottom: var(--space-2);
             }
             
-            /* Improved todo items */
-            .todo-list {
-                gap: var(--space-2);
+            .stat-number {
+                font-size: var(--font-2xl);
             }
             
-            .todo-item {
-                padding: var(--space-4);
-                border-radius: 14px;
-                gap: var(--space-3);
+            .stat-label {
+                font-size: var(--font-xs);
             }
             
-            .todo-checkbox {
-                width: 26px;
-                height: 26px;
+            .progress-bar {
+                height: 6px;
             }
             
-            .todo-title {
-                font-size: var(--font-base);
-                line-height: 1.5;
-            }
-            
-            /* Better habit items */
-            .habit-item {
-                padding: var(--space-4);
-                border-radius: 14px;
-            }
-            
-            .habit-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            
-            .habit-day {
-                width: 32px;
-                height: 32px;
-                font-size: 11px;
-            }
-            
-            /* Improved dashboard */
-            .dashboard-grid {
-                gap: var(--space-4);
-            }
-            
+            /* Dashboard cards */
             .dashboard-card {
                 border-radius: 18px;
                 padding: var(--space-4);
+                margin-bottom: var(--space-4);
             }
             
             .card-header {
@@ -3601,32 +3569,22 @@
             
             .card-title {
                 font-size: var(--font-base);
+                gap: var(--space-2);
             }
             
-            /* Better stats */
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-3);
+            .card-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
             }
             
-            .stat-card {
-                padding: var(--space-4);
-                border-radius: 14px;
+            /* Pomodoro card */
+            .pomodoro-card {
+                grid-column: auto;
             }
             
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            
-            .stat-number {
-                font-size: var(--font-2xl);
-            }
-            
-            /* Improved timer */
             .pomodoro-timer {
-                padding: var(--space-4);
+                padding: var(--space-3);
             }
             
             .timer-display {
@@ -3636,18 +3594,27 @@
             }
             
             .timer-time {
-                font-size: 30px;
+                font-size: 28px;
+            }
+            
+            .timer-label {
+                font-size: var(--font-xs);
+            }
+            
+            .timer-controls {
+                gap: var(--space-3);
             }
             
             .timer-btn {
-                width: 44px;
-                height: 44px;
+                width: 48px;
+                height: 48px;
                 font-size: 18px;
             }
             
             .timer-modes {
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: var(--space-2);
             }
             
             .timer-mode-btn {
@@ -3655,126 +3622,245 @@
                 font-size: var(--font-xs);
             }
             
-            /* Better modals */
-            .modal-overlay {
-                padding: var(--space-4);
-                align-items: flex-end;
-            }
-            
-            .modal {
-                width: 100%;
-                max-height: 85vh;
-                border-radius: 20px 20px 0 0;
-                margin: 0;
-            }
-            
-            .modal-header {
-                padding: var(--space-4);
-            }
-            
-            .modal-body {
-                padding: var(--space-4);
-                max-height: calc(85vh - 140px);
-            }
-            
-            .modal-footer {
-                padding: var(--space-4);
-                flex-wrap: wrap;
+            .pomodoro-stats {
                 gap: var(--space-2);
             }
             
-            .modal-footer .btn {
-                flex: 1;
-                min-width: 100px;
+            .pomo-stat-value {
+                font-size: var(--font-lg);
             }
             
-            /* Better forms */
-            .form-group {
-                margin-bottom: var(--space-4);
+            /* Habits card */
+            .habits-card {
+                grid-column: auto;
             }
             
-            .form-label {
-                font-size: var(--font-sm);
-                margin-bottom: var(--space-2);
+            .habits-grid {
+                gap: var(--space-3);
             }
             
-            .form-input, .form-select, .form-textarea {
-                font-size: 16px;
-                padding: var(--space-3) var(--space-4);
-                border-radius: var(--radius-md);
+            .habit-item {
+                padding: var(--space-3);
+                border-radius: 14px;
+                gap: var(--space-3);
             }
             
-            .color-picker {
-                gap: var(--space-2);
-            }
-            
-            .color-option {
-                width: 40px;
-                height: 40px;
-                border-radius: var(--radius-md);
-            }
-            
-            /* Better buttons */
-            .btn {
-                padding: var(--space-3) var(--space-4);
-                font-size: var(--font-sm);
-                border-radius: var(--radius-md);
-            }
-            
-            .btn-icon {
-                width: 44px;
-                height: 44px;
-            }
-            
-            /* Improved bottom nav */
-            .bottom-nav {
-                padding: 6px 0;
-                padding-bottom: max(6px, env(safe-area-inset-bottom));
-            }
-            
-            .bottom-nav-item {
-                min-width: 56px;
-                min-height: 48px;
-                padding: 6px 4px;
-            }
-            
-            .bottom-nav-icon {
+            .habit-icon {
+                width: 42px;
+                height: 42px;
                 font-size: 20px;
             }
             
-            .bottom-nav-label {
-                font-size: 11px;
+            .habit-name {
+                font-size: var(--font-sm);
             }
             
-            .bottom-nav-count {
-                min-width: 16px;
-                height: 16px;
+            .habit-streak {
+                font-size: var(--font-xs);
+            }
+            
+            .habit-week {
+                gap: 3px;
+            }
+            
+            .habit-day {
+                width: 30px;
+                height: 30px;
                 font-size: 10px;
-                top: 2px;
-                right: 10px;
             }
             
-            /* Better floating button */
-            .floating-add-btn {
-                width: 54px;
-                height: 54px;
-                font-size: 22px;
-                bottom: calc(90px + var(--space-3)) !important;
-                left: var(--space-3);
+            .streak-badge {
+                padding: 2px 8px;
+                font-size: var(--font-xs);
             }
             
-            /* Improved folder detail view */
+            /* ==================== Tasks Mobile ==================== */
+            .todo-list {
+                gap: var(--space-3);
+            }
+            
+            .todo-item {
+                padding: var(--space-4);
+                border-radius: 14px;
+                gap: var(--space-3);
+                min-height: auto;
+            }
+            
+            .todo-checkbox {
+                width: 26px;
+                height: 26px;
+                flex-shrink: 0;
+            }
+            
+            .todo-item-content {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            .todo-title {
+                font-size: var(--font-base);
+                line-height: 1.5;
+                word-break: break-word;
+            }
+            
+            .todo-meta {
+                font-size: var(--font-xs);
+                margin-top: var(--space-1);
+            }
+            
+            .todo-actions {
+                opacity: 1;
+                gap: var(--space-1);
+            }
+            
+            .todo-action-btn {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .todo-progress {
+                margin-top: var(--space-2);
+            }
+            
+            .progress-steps-bar {
+                height: 5px;
+            }
+            
+            .progress-steps-text {
+                font-size: var(--font-xs);
+            }
+            
+            /* ==================== Notes Mobile ==================== */
+            .notes-grid {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+            
+            .note-card {
+                border-radius: 16px;
+                min-height: auto;
+            }
+            
+            .note-color-bar {
+                height: 4px;
+            }
+            
+            .note-card-body {
+                padding: var(--space-4);
+            }
+            
+            .note-title {
+                font-size: var(--font-base);
+                margin-bottom: var(--space-2);
+            }
+            
+            .note-content {
+                font-size: var(--font-sm);
+                line-height: 1.6;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .note-footer {
+                padding-top: var(--space-3);
+                margin-top: var(--space-3);
+            }
+            
+            .note-date {
+                font-size: var(--font-xs);
+            }
+            
+            .note-actions {
+                opacity: 1;
+                gap: var(--space-1);
+            }
+            
+            /* ==================== Folders Mobile ==================== */
+            .folders-grid {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-4);
+            }
+            
+            .folder-card {
+                border-radius: 20px;
+                min-height: auto;
+            }
+            
+            .folder-color-accent {
+                height: 4px;
+            }
+            
+            .folder-header {
+                padding: var(--space-4);
+                gap: var(--space-3);
+                align-items: center;
+            }
+            
+            .folder-icon-wrapper {
+                width: 60px;
+                height: 60px;
+                border-radius: 16px;
+                font-size: 28px;
+            }
+            
+            .folder-name {
+                font-size: var(--font-lg);
+                margin-bottom: var(--space-1);
+            }
+            
+            .folder-meta {
+                gap: var(--space-2);
+                flex-wrap: wrap;
+            }
+            
+            .folder-count {
+                padding: 4px 10px;
+                font-size: var(--font-xs);
+            }
+            
+            .folder-body {
+                padding: 0 var(--space-4) var(--space-3);
+            }
+            
+            .folder-progress {
+                gap: var(--space-2);
+            }
+            
+            .folder-progress-bar {
+                height: 6px;
+            }
+            
+            .folder-progress-text {
+                font-size: var(--font-xs);
+                min-width: 40px;
+            }
+            
+            .folder-footer {
+                padding: var(--space-3);
+                gap: var(--space-1);
+            }
+            
+            .folder-action-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+            
+            /* Folder detail */
             .folder-detail-header {
-                flex-direction: row;
                 padding: var(--space-4);
                 border-radius: 16px;
                 gap: var(--space-3);
             }
             
             .folder-detail-icon {
-                width: 56px;
-                height: 56px;
-                font-size: 28px;
+                width: 54px;
+                height: 54px;
+                font-size: 26px;
             }
             
             .folder-detail-name {
@@ -3791,26 +3877,7 @@
                 margin-bottom: var(--space-3);
             }
             
-            /* Better empty states */
-            .folders-empty {
-                padding: var(--space-8) var(--space-4);
-            }
-            
-            .folders-empty-icon {
-                width: 100px;
-                height: 100px;
-                font-size: 48px;
-            }
-            
-            .folders-empty-title {
-                font-size: var(--font-lg);
-            }
-            
-            .folders-empty-desc {
-                font-size: var(--font-sm);
-            }
-            
-            /* Better settings */
+            /* ==================== Settings Mobile ==================== */
             .settings-section {
                 padding: var(--space-4);
                 border-radius: 16px;
@@ -3825,6 +3892,11 @@
             .settings-row {
                 padding: var(--space-3);
                 border-radius: var(--radius-md);
+                gap: var(--space-3);
+            }
+            
+            .settings-row > div:first-child {
+                flex: 1;
             }
             
             .settings-label {
@@ -3835,7 +3907,289 @@
                 font-size: var(--font-xs);
             }
             
-            /* Better toasts */
+            /* ==================== Modals Mobile ==================== */
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+            
+            .modal {
+                width: 100%;
+                max-height: 90vh;
+                border-radius: 20px 20px 0 0;
+                margin: 0;
+            }
+            
+            .modal-header {
+                padding: var(--space-4);
+                border-radius: 20px 20px 0 0;
+            }
+            
+            .modal-title {
+                font-size: var(--font-lg);
+            }
+            
+            .modal-close {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .modal-body {
+                padding: var(--space-4);
+                max-height: calc(90vh - 130px);
+            }
+            
+            .modal-footer {
+                padding: var(--space-3) var(--space-4);
+                gap: var(--space-2);
+                flex-wrap: wrap;
+            }
+            
+            .modal-footer .btn {
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            /* ==================== Forms Mobile ==================== */
+            .form-group {
+                margin-bottom: var(--space-4);
+            }
+            
+            .form-label {
+                font-size: var(--font-sm);
+                margin-bottom: var(--space-2);
+            }
+            
+            .form-input, .form-select, .form-textarea {
+                font-size: 16px;
+                padding: var(--space-3) var(--space-4);
+                border-radius: var(--radius-md);
+            }
+            
+            .form-textarea {
+                min-height: 100px;
+            }
+            
+            .color-picker {
+                gap: var(--space-2);
+            }
+            
+            .color-option {
+                width: 38px;
+                height: 38px;
+                border-radius: var(--radius-md);
+            }
+            
+            .tags-input-container {
+                padding: var(--space-2);
+            }
+            
+            .tag-item {
+                padding: 4px 10px;
+                font-size: var(--font-xs);
+            }
+            
+            .checkbox-container {
+                padding: var(--space-2);
+            }
+            
+            .checkbox-custom {
+                width: 22px;
+                height: 22px;
+            }
+            
+            /* ==================== Buttons Mobile ==================== */
+            .btn {
+                padding: var(--space-3) var(--space-4);
+                font-size: var(--font-sm);
+                border-radius: var(--radius-md);
+                min-height: 44px;
+            }
+            
+            .btn-sm {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--font-xs);
+                min-height: 36px;
+            }
+            
+            .btn-icon {
+                width: 44px;
+                height: 44px;
+                padding: 0;
+            }
+            
+            /* ==================== Bottom Navigation ==================== */
+            .bottom-nav {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--bg-surface);
+                border-top: 1px solid var(--border-subtle);
+                padding: 6px 0;
+                padding-bottom: max(6px, env(safe-area-inset-bottom));
+                z-index: 200;
+            }
+            
+            .bottom-nav-items {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .bottom-nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                padding: 8px 4px;
+                border-radius: var(--radius-md);
+                cursor: pointer;
+                color: var(--text-muted);
+                min-width: 56px;
+                min-height: 48px;
+                transition: all 0.15s ease;
+            }
+            
+            .bottom-nav-item:active {
+                transform: scale(0.95);
+            }
+            
+            .bottom-nav-item.active {
+                color: var(--primary-500);
+            }
+            
+            .bottom-nav-item.active .bottom-nav-icon {
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+                border-radius: 10px;
+                padding: 6px 10px;
+            }
+            
+            .bottom-nav-icon {
+                font-size: 22px;
+                line-height: 1;
+                padding: 4px 6px;
+            }
+            
+            .bottom-nav-label {
+                font-size: 10px;
+                font-weight: 600;
+            }
+            
+            .bottom-nav-count {
+                position: absolute;
+                top: 4px;
+                right: 10px;
+                min-width: 16px;
+                height: 16px;
+                font-size: 9px;
+                border-radius: 8px;
+            }
+            
+            /* Bottom nav more menu */
+            .bottom-nav-more {
+                position: fixed;
+                bottom: 70px;
+                left: var(--space-3);
+                right: var(--space-3);
+                background: var(--bg-glass-strong);
+                backdrop-filter: blur(16px);
+                border-radius: 16px;
+                border: 1px solid var(--border-subtle);
+                box-shadow: var(--shadow-xl);
+                padding: var(--space-2);
+                z-index: 199;
+            }
+            
+            .bottom-nav-more-item {
+                display: flex;
+                align-items: center;
+                gap: var(--space-3);
+                padding: var(--space-3) var(--space-4);
+                border-radius: var(--radius-md);
+                font-size: var(--font-sm);
+                font-weight: 600;
+                color: var(--text-primary);
+            }
+            
+            .bottom-nav-more-item:active {
+                background: var(--bg-subtle);
+            }
+            
+            /* ==================== Floating Button ==================== */
+            .floating-add-btn {
+                display: flex !important;
+                position: fixed;
+                bottom: calc(80px + var(--space-3));
+                left: var(--space-3);
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--primary-500), var(--accent-violet), var(--accent-pink));
+                color: white;
+                font-size: 24px;
+                border: none;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                z-index: 150;
+                box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            }
+            
+            .floating-add-btn:active {
+                transform: scale(0.95);
+            }
+            
+            /* Hide header primary button on mobile */
+            .header .btn-primary {
+                display: none;
+            }
+            
+            /* ==================== Empty States ==================== */
+            .empty-state {
+                padding: var(--space-8) var(--space-4);
+            }
+            
+            .empty-state-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+                margin-bottom: var(--space-4);
+            }
+            
+            .empty-state-title {
+                font-size: var(--font-lg);
+                margin-bottom: var(--space-2);
+            }
+            
+            .empty-state-desc {
+                font-size: var(--font-sm);
+            }
+            
+            .folders-empty {
+                padding: var(--space-8) var(--space-4);
+            }
+            
+            .folders-empty-icon {
+                width: 90px;
+                height: 90px;
+                font-size: 44px;
+                margin-bottom: var(--space-4);
+            }
+            
+            .folders-empty-title {
+                font-size: var(--font-lg);
+            }
+            
+            .folders-empty-desc {
+                font-size: var(--font-sm);
+            }
+            
+            /* ==================== Toast ==================== */
             .toast-container {
                 left: var(--space-3);
                 right: var(--space-3);
@@ -3845,21 +4199,10 @@
             .toast {
                 padding: var(--space-3) var(--space-4);
                 border-radius: var(--radius-md);
+                font-size: var(--font-sm);
             }
             
-            /* Improved bottom nav more menu */
-            .bottom-nav-more {
-                bottom: 70px;
-                left: var(--space-3);
-                right: var(--space-3);
-                border-radius: 16px;
-            }
-            
-            .bottom-nav-more-item {
-                padding: var(--space-3) var(--space-4);
-            }
-            
-            /* Better dropdown menus */
+            /* ==================== Dropdowns ==================== */
             .global-dropdown .dropdown-menu {
                 border-radius: 14px;
                 min-width: 160px;
@@ -3870,7 +4213,7 @@
                 font-size: var(--font-sm);
             }
             
-            /* Improved achievements */
+            /* ==================== Achievements ==================== */
             .achievements-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: var(--space-2);
@@ -3883,67 +4226,84 @@
             
             .achievement-icon {
                 font-size: 28px;
+                margin-bottom: var(--space-1);
             }
             
-            /* Fix text selection issues */
-            .nav-item, .bottom-nav-item, .todo-item, .note-card, .folder-card, .habit-item {
+            .achievement-name {
+                font-size: var(--font-xs);
+            }
+            
+            /* ==================== Misc Mobile ==================== */
+            /* Disable text selection on interactive elements */
+            .nav-item, .bottom-nav-item, .todo-item, .note-card, .folder-card, .habit-item, .btn {
                 -webkit-user-select: none;
                 user-select: none;
             }
             
-            /* Better scroll behavior */
-            .content, .modal-body, .sidebar-nav {
-                scroll-behavior: smooth;
+            /* Better scrolling */
+            .content, .modal-body {
                 -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
             }
             
-            /* Fix iOS safe areas */
-            .bottom-nav {
-                padding-bottom: max(8px, env(safe-area-inset-bottom));
-            }
-            
-            .content {
-                padding-bottom: calc(100px + env(safe-area-inset-bottom));
-            }
-            
-            /* Improved touch feedback */
-            .nav-item:active, .todo-item:active, .note-card:active, .folder-card:active {
-                transform: scale(0.98);
-                opacity: 0.9;
-            }
-            
-            /* Better PWA install prompt */
-            .pwa-install-prompt {
-                left: var(--space-3);
-                right: var(--space-3);
-                bottom: calc(80px + var(--space-3));
-                border-radius: 16px;
-                padding: var(--space-4);
-            }
-            
-            /* Improved weather widget */
+            /* Weather widget */
             .weather-widget {
-                padding: var(--space-3) var(--space-4);
+                display: none;
             }
             
-            .weather-icon-container {
-                width: 40px;
-                height: 40px;
+            /* Pull indicator */
+            .pull-indicator {
+                height: 50px;
+                transform: translateY(-50px);
             }
             
-            .weather-icon {
-                font-size: 24px;
+            /* Swipe delete */
+            .swipe-delete-bg {
+                padding: 0 var(--space-4);
             }
             
-            .weather-temp {
-                font-size: var(--font-base);
+            .swipe-delete-bg span {
+                font-size: var(--font-xs);
+            }
+            
+            /* Subtasks */
+            .subtasks-container {
+                padding: var(--space-3);
+            }
+            
+            .subtask-item {
+                padding: var(--space-2) 0;
+            }
+            
+            .subtask-checkbox {
+                width: 20px;
+                height: 20px;
+            }
+            
+            /* Recycle bin */
+            .recycle-item {
+                padding: var(--space-3);
+                border-radius: var(--radius-md);
+                margin-bottom: var(--space-2);
+            }
+            
+            .recycle-title {
+                font-size: var(--font-sm);
+            }
+            
+            .recycle-type {
+                font-size: var(--font-xs);
             }
         }
         
         /* Extra small screens */
         @media (max-width: 380px) {
+            html {
+                font-size: 14px;
+            }
+            
             .stats-row {
-                grid-template-columns: 1fr 1fr;
+                gap: var(--space-2);
             }
             
             .stat-card {
@@ -3955,18 +4315,24 @@
             }
             
             .folder-icon-wrapper {
-                width: 60px;
-                height: 60px;
-                font-size: 28px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
             }
             
             .timer-display {
-                width: 120px;
-                height: 120px;
+                width: 110px;
+                height: 110px;
             }
             
             .timer-time {
-                font-size: 28px;
+                font-size: 26px;
+            }
+            
+            .floating-add-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 22px;
             }
         }
         
@@ -3974,6 +4340,12 @@
         @media (max-width: 768px) and (orientation: landscape) {
             .modal {
                 max-height: 95vh;
+                border-radius: 16px;
+                margin: auto;
+            }
+            
+            .modal-header {
+                border-radius: 16px 16px 0 0;
             }
             
             .modal-body {
@@ -3981,8 +4353,12 @@
             }
             
             .timer-display {
-                width: 110px;
-                height: 110px;
+                width: 100px;
+                height: 100px;
+            }
+            
+            .timer-time {
+                font-size: 24px;
             }
             
             .pomodoro-timer {
@@ -7831,7 +8207,7 @@
                 <div class="settings-section">
                     <h3 class="settings-title">ℹ️ ${i18n.t('about')}</h3>
                     <div style="color:var(--text-secondary);font-size:var(--font-sm)">
-                        <p><strong>TaskNotes Ultimate</strong> - v8.2.0</p>
+                        <p><strong>TaskNotes Ultimate</strong> - v8.2.1</p>
                         <p>✅ ${i18n.t('todos')} | 📝 ${i18n.t('notes')} | 🎯 ${i18n.t('habits')} | 🍅 ${i18n.t('pomodoroTimer')} | ☁️ مزامنة</p>
                     </div>
                 </div>

@@ -670,6 +670,25 @@
         /* ==================== Content Area ==================== */
         .content { flex: 1; padding: var(--space-6); overflow-y: auto; }
         
+        /* Smooth page transitions */
+        .content {
+            animation: fadeIn 0.25s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content.fade-out {
+            animation: fadeOut 0.15s ease-out;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+        
         /* ==================== Dashboard ==================== */
         .dashboard-grid {
             display: grid;
@@ -4025,19 +4044,28 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background: var(--bg-surface);
-                border-top: 1px solid var(--border-subtle);
-                padding: 6px 0;
-                padding-bottom: max(6px, env(safe-area-inset-bottom));
+                background: var(--bg-glass-strong);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(99, 102, 241, 0.1);
+                padding: 4px 0;
+                padding-bottom: max(4px, env(safe-area-inset-bottom));
                 z-index: 200;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            }
+            
+            .dark .bottom-nav {
+                background: rgba(30, 41, 59, 0.95);
+                border-top-color: rgba(99, 102, 241, 0.15);
             }
             
             .bottom-nav-items {
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
-                max-width: 500px;
+                max-width: 600px;
                 margin: 0 auto;
+                padding: 0 4px;
             }
             
             .bottom-nav-item {
@@ -4045,18 +4073,21 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 3px;
-                padding: 8px 4px;
+                gap: 2px;
+                padding: 6px 8px;
                 border-radius: var(--radius-md);
                 cursor: pointer;
                 color: var(--text-muted);
-                min-width: 56px;
-                min-height: 48px;
-                transition: all 0.15s ease;
+                min-width: 48px;
+                flex: 1;
+                max-width: 72px;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                -webkit-tap-highlight-color: transparent;
             }
             
             .bottom-nav-item:active {
-                transform: scale(0.95);
+                transform: scale(0.92);
             }
             
             .bottom-nav-item.active {
@@ -4066,58 +4097,41 @@
             .bottom-nav-item.active .bottom-nav-icon {
                 background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
                 border-radius: 10px;
-                padding: 6px 10px;
+                padding: 4px 8px;
+                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
             }
             
             .bottom-nav-icon {
-                font-size: 22px;
+                font-size: 20px;
                 line-height: 1;
-                padding: 4px 6px;
+                padding: 3px 5px;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
             
             .bottom-nav-label {
-                font-size: 10px;
+                font-size: 9px;
                 font-weight: 600;
+                transition: all 0.2s ease;
+            }
+            
+            .bottom-nav-item.active .bottom-nav-label {
+                color: var(--primary-500);
             }
             
             .bottom-nav-count {
                 position: absolute;
-                top: 4px;
-                right: 10px;
+                top: 2px;
+                right: 8px;
                 min-width: 16px;
                 height: 16px;
                 font-size: 9px;
                 border-radius: 8px;
-            }
-            
-            /* Bottom nav more menu */
-            .bottom-nav-more {
-                position: fixed;
-                bottom: 70px;
-                left: var(--space-3);
-                right: var(--space-3);
-                background: var(--bg-glass-strong);
-                backdrop-filter: blur(16px);
-                border-radius: 16px;
-                border: 1px solid var(--border-subtle);
-                box-shadow: var(--shadow-xl);
-                padding: var(--space-2);
-                z-index: 199;
-            }
-            
-            .bottom-nav-more-item {
+                background: var(--accent-rose);
+                color: white;
                 display: flex;
                 align-items: center;
-                gap: var(--space-3);
-                padding: var(--space-3) var(--space-4);
-                border-radius: var(--radius-md);
-                font-size: var(--font-sm);
-                font-weight: 600;
-                color: var(--text-primary);
-            }
-            
-            .bottom-nav-more-item:active {
-                background: var(--bg-subtle);
+                justify-content: center;
+                font-weight: 700;
             }
             
             /* ==================== Floating Button ==================== */
@@ -4534,35 +4548,13 @@
                 <span class="bottom-nav-icon">🎯</span>
                 <span class="bottom-nav-label">العادات</span>
             </div>
-            <div class="bottom-nav-item bottom-nav-more" onclick="toggleBottomNavMore()">
-                <span class="bottom-nav-icon">⋯</span>
-                <span class="bottom-nav-label">المزيد</span>
-                <div class="bottom-nav-more-menu" id="bottom-nav-more-menu" onclick="event.stopPropagation();">
-                    <div class="bottom-nav-more-item" data-view="important" onclick="closeBottomNavMore(); switchView('important');">
-                        <span>⭐</span>
-                        <span>المهمة</span>
-                    </div>
-                    <div class="bottom-nav-more-item" data-view="today" onclick="closeBottomNavMore(); switchView('today');">
-                        <span>📅</span>
-                        <span>اليوم</span>
-                    </div>
-                    <div class="bottom-nav-more-item" data-view="flagged" onclick="closeBottomNavMore(); switchView('flagged');">
-                        <span>🚩</span>
-                        <span>مميزة</span>
-                    </div>
-                    <div class="bottom-nav-more-item" data-view="history" onclick="closeBottomNavMore(); switchView('history');">
-                        <span>📜</span>
-                        <span>السجل</span>
-                    </div>
-                    <div class="bottom-nav-more-item" data-view="folders" onclick="closeBottomNavMore(); switchView('folders');">
-                        <span>📁</span>
-                        <span>المجلدات</span>
-                    </div>
-                    <div class="bottom-nav-more-item" data-view="settings" onclick="closeBottomNavMore(); switchView('settings');">
-                        <span>⚙️</span>
-                        <span>الإعدادات</span>
-                    </div>
-                </div>
+            <div class="bottom-nav-item" data-view="folders" onclick="switchView('folders')">
+                <span class="bottom-nav-icon">📁</span>
+                <span class="bottom-nav-label">المجلدات</span>
+            </div>
+            <div class="bottom-nav-item" data-view="settings" onclick="switchView('settings')">
+                <span class="bottom-nav-icon">⚙️</span>
+                <span class="bottom-nav-label">الإعدادات</span>
             </div>
         </div>
     </nav>
@@ -6981,35 +6973,32 @@
 
         // ==================== View Management ====================
         function switchView(view) {
-            // Prevent same view
-            if (state.currentView === view) return;
-            
             // Update state
             state.currentView = view;
             
-            // Update all navigation elements
-            document.querySelectorAll('.nav-item').forEach(item => {
-                if (item.dataset.view === view) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
+            // Add fade-out animation to content
+            const contentArea = document.getElementById('content-area');
+            if (contentArea) {
+                contentArea.classList.add('fade-out');
+            }
             
-            document.querySelectorAll('.bottom-nav-item').forEach(item => {
-                if (item.dataset.view === view) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            document.querySelectorAll('.bottom-nav-more-item').forEach(item => {
-                if (item.dataset.view === view) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
+            // Update all navigation elements with smooth transition
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    if (item.dataset.view === view) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                    if (item.dataset.view === view) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
             });
             
             // Update header
@@ -7033,12 +7022,17 @@
             if (viewTitle) viewTitle.textContent = config.title;
             if (headerIcon) headerIcon.textContent = config.icon;
             
-            // Close sidebar and bottom nav menu
+            // Close sidebar
             closeSidebar();
-            closeBottomNavMore();
             
-            // Render the view
-            renderView();
+            // Render the view after a short delay for smooth animation
+            setTimeout(() => {
+                renderView();
+                // Remove fade-out class
+                if (contentArea) {
+                    contentArea.classList.remove('fade-out');
+                }
+            }, 50);
         }
 
         function renderView() {
@@ -8207,7 +8201,7 @@
                 <div class="settings-section">
                     <h3 class="settings-title">ℹ️ ${i18n.t('about')}</h3>
                     <div style="color:var(--text-secondary);font-size:var(--font-sm)">
-                        <p><strong>TaskNotes Ultimate</strong> - v8.2.1</p>
+                        <p><strong>TaskNotes Ultimate</strong> - v8.2.2</p>
                         <p>✅ ${i18n.t('todos')} | 📝 ${i18n.t('notes')} | 🎯 ${i18n.t('habits')} | 🍅 ${i18n.t('pomodoroTimer')} | ☁️ مزامنة</p>
                     </div>
                 </div>
@@ -9977,15 +9971,6 @@
             
             // Initialize Pull to Refresh
             PullToRefresh.init();
-            
-            // Close bottom nav more menu when clicking outside
-            document.addEventListener('click', function(e) {
-                const moreBtn = document.querySelector('.bottom-nav-more');
-                const moreMenu = document.getElementById('bottom-nav-more-menu');
-                if (moreBtn && moreMenu && !moreBtn.contains(e.target)) {
-                    moreMenu.classList.remove('show');
-                }
-            });
             
             renderView();
             updateCounts();
